@@ -81,7 +81,9 @@ public class InMemoryEntityCache implements EntityCache {
         Caffeine.newBuilder()
             .maximumWeight(weigherTarget)
             .weigher(EntityWeigher.asWeigher())
-            .expireAfterAccess(1, TimeUnit.HOURS) // Expire entries after 1 hour of no access
+            // .expireAfterAccess(1, TimeUnit.HOURS) // Expire entries after 1 hour of no access
+            // @ASHLEY: Expire entries after 10 minutes of no access due to large number of entities
+            .expireAfterAccess(10, TimeUnit.MINUTES) 
             .removalListener(removalListener); // Set the removal listener
 
     boolean useSoftValues =

@@ -84,13 +84,14 @@ public class AwsCredentialsStorageIntegration
             .externalId(storageConfig.getExternalId())
             .roleArn(storageConfig.getRoleARN())
             .roleSessionName("PolarisAwsCredentialsStorageIntegration")
-            .policy(
-                policyString(
-                        storageConfig.getAwsPartition(),
-                        allowListOperation,
-                        allowedReadLocations,
-                        allowedWriteLocations)
-                    .toJson())
+            // @ASHLEY: Disable policy scoping for now to avoid issues with permissions due to AWS SSE KMS
+            // .policy(
+            //     policyString(
+            //             storageConfig.getAwsPartition(),
+            //             allowListOperation,
+            //             allowedReadLocations,
+            //             allowedWriteLocations)
+            //         .toJson())
             .durationSeconds(storageCredentialDurationSeconds);
     credentialsProvider.ifPresent(
         cp -> request.overrideConfiguration(b -> b.credentialsProvider(cp)));
