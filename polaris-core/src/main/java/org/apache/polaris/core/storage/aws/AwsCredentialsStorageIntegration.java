@@ -165,6 +165,8 @@ public class AwsCredentialsStorageIntegration
    * and just assuming the role with full privileges.
    */
   // TODO - add KMS key access
+  // @ASHLEY: Remove warning for UnusedMethod due to compilation issues
+  @SuppressWarnings("UnusedMethod")
   private IamPolicy policyString(
       String awsPartition,
       boolean allowList,
